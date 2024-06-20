@@ -65,7 +65,7 @@ const update = async(req,res) => {
 const get = async(req,res) => {
     try {
         const city = await cityService.getCity(req.params.id);
-        return resizeBy.status(201).json({
+        return res.status(201).json({
           data:city,
           success:true,
           message:"Successfully fetched a city",
