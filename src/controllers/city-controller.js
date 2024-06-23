@@ -1,103 +1,124 @@
 const { CityService } = require("../services/index");
 
 const cityService = new CityService();
-const create = async(req,res) => {
+const create = async (req, res) => {
     try {
-      const city = await cityService.createCity(req.body);
-      return res.status(201).json({
-        data:city,
-        success:true,
-        message:"Successfully created a city",
-        err:{}
-      })
+        const city = await cityService.createCity(req.body);
+        return res.status(201).json({
+            data: city,
+            success: true,
+            message: "Successfully created a city",
+            err: {}
+        })
     } catch (error) {
         console.log(error);
         return res.status(500).json({
-            data:{},
+            data: {},
             success: false,
             message: 'Not able to create a city',
-            err:error
+            err: error
         })
     }
 }
 
-const destroy = async(req,res) => {
+const createMulti = async (req, res) => {
+    try {
+        //req.body is array of objects 
+        const cities = await cityService.createCities(req.body);
+        return res.status(201).json({
+            data: cities,
+            success: true,
+            message: "Successfully created a cities",
+            err: {}
+        })
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            data: {},
+            success: false,
+            message: 'Not able to create a city',
+            err: error
+        })
+    }
+}
+
+const destroy = async (req, res) => {
     try {
         const city = await cityService.deleteCity(req.params.id);
         return res.status(200).json({
-          data:city,
-          success:true,
-          message:"Successfully deleted a city",
-          err:{}
+            data: city,
+            success: true,
+            message: "Successfully deleted a city",
+            err: {}
         })
     } catch (error) {
         console.log(error);
         return res.status(500).json({
-            data:{},
+            data: {},
             success: false,
             message: 'Not able to delete a city',
-            err:error
+            err: error
         })
     }
 }
 
-const update = async(req,res) => {
+const update = async (req, res) => {
     try {
-        const city = await cityService.updateCity(req.params.id,req.body);
+        const city = await cityService.updateCity(req.params.id, req.body);
         return res.status(201).json({
-          data:city,
-          success:true,
-          message:"Successfully updated a city",
-          err:{}
+            data: city,
+            success: true,
+            message: "Successfully updated a city",
+            err: {}
         })
 
     } catch (error) {
         console.log(error);
         return res.status(500).json({
-            data:{},
+            data: {},
             success: false,
             message: 'Not able to update a city',
-            err:error
+            err: error
         })
     }
 }
 
-const get = async(req,res) => {
+const get = async (req, res) => {
     try {
         const city = await cityService.getCity(req.params.id);
         return res.status(201).json({
-          data:city,
-          success:true,
-          message:"Successfully fetched a city",
-          err:{}
+            data: city,
+            success: true,
+            message: "Successfully fetched a city",
+            err: {}
         })
     } catch (error) {
         console.log(error);
         return res.status(500).json({
-            data:{},
+            data: {},
             success: false,
             message: 'Not able to fetch a city',
-            err:error
+            err: error
         })
     }
 }
 
-const getAll = async(req,res) =>{
+const getAll = async (req, res) => {
     try {
         const cities = await cityService.getAllCities(req.query);
         return res.status(200).json({
-            data:cities,
-            success:true,
-            message:"Successfully fetched all cities",
-            err:{}
+            data: cities,
+            success: true,
+            message: "Successfully fetched all cities",
+            err: {}
         })
     } catch (error) {
         console.log(error);
         return res.status(500).json({
-            data:{},
+            data: {},
             success: false,
             message: 'Not able to fetch all cities',
-            err:error
+            err: error
         })
     }
 }
@@ -107,5 +128,6 @@ module.exports = {
     destroy,
     update,
     get,
-    getAll
+    getAll,
+    createMulti
 }
