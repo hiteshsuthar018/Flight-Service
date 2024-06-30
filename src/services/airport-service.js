@@ -1,15 +1,10 @@
-const {AirportRepository} = require("../repository/index");
-
-class AirportService{
-    constructor(){
-        this.airportRepository = new AirportRepository();
-    }
-
-    async createAirport({name,address}){
-     try {
-        
-     } catch (error) {
-        
-     }
-    } 
+const CrudService = require('./crud-service');
+const {AirportRepository} = require("../repository/index")
+class AirportService extends CrudService{
+   constructor(){
+    const airportRepository = new AirportRepository();
+    super(airportRepository);
+   }
 }
+
+module.exports = AirportService;
